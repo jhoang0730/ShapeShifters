@@ -42,6 +42,7 @@ public:
     // Getters
     int GetID() const;
     ShapeType GetShapeType() const;
+    QPainter& GetPainter() const;
     QPen& GetPen() const;
     QBrush& GetBrush() const;
 
