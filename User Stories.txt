@@ -1,0 +1,279 @@
+---- USER STORY #1 ----
+#1 As a user, I can view shapes
+a) Description:
+- Users can view all shapes in the library.
+- Each object has their ID either above or below them.
+- The rendering area to display shapes must have minimum dimensions of 1000 pixels (horizontal) by 500 pixels (vertical).
+- The coordinate system is defined such that the top left corner of the rendering area is located at point (0,0), the bottom right corner at point (1000, 500).
+ 
+b) Tasks:
+- Set up QT graphic interface.
+- Implement draw space to the interface.
+- Load the existing shapes from a file.
+ 
+c) Tests:
+- Verify the rendering area.
+- Verify the objects.
+ 
+d) Assignee:
+- Jade: Implement the draw space to the graphic interface.
+- Harris: Load the shapes from a file to the interface and test the program.
+ 
+e) Estimation: ~ 5 days
+ 
+f) Priority: 1
+ 
+g) Done:
+- The rendering area is created with appropriate size so that the user is able to see.
+- All the objects are declared and labeled along with their properties in a file.
+
+
+
+
+---- USER STORY #2 ----
+#2 As a user, I can move shapes (including texts).
+a) Description:
+Users can move shapes, rather than having them in a stationary position.
+Shapes can be moved around the window
+
+b) Tasks:
+Shape can be dragged by users mouse cursor
+
+c) Tests:
+Shapes do not leave window or become intractable
+Define windows limit, must we dynamic
+ 
+d) Assignee:
+- Justin: Make sure the shape can be moved or dragged within the window.
+- Kyle: TBD
+- Gabriel: TBD
+ 
+e) Estimation:
+ 	~1 day
+f) Priority:
+11
+g) Done:
+Users can use a mouse cursor to move shape around with the shape being invariant.
+
+---- USER STORY #3 ----
+#3 As a user, I can rotate shapes.
+a) Description:
+User can rotate the shape in either clockwise or counterclockwise direction
+User can enter the degree at which the shape will be rotated
+ 
+b) Tasks:
+Access Qt painter software
+Bind shape to an axis
+Rotate the axis
+Delete the axis
+c) Tests:
+Check if shape is properly bound to the axis by translating the axis in x and y direction and seeing if the shape follows
+Rotate the axis (possibly use inverse tangent to equate distance to angles)
+ 
+d) Assignee:
+- Kyle: TBD
+- Gabriel: TBD
+- Justin: TBD
+ 
+e) Estimation: 2 Days
+ 
+f) Priority: 15
+ 
+g) Done:
+The shape properly rotates in both directions (cw and ccw)
+
+---- USER STORY #4 ----
+#4 As a user, I can overlap shapes.
+a) Description:
+User will be able to draw another shape on top of the same canvas that another shape was drawn on
+ 
+b) Tasks:
+Preserve the previous shape on the canvas
+Call the draw shape function again to have it draw the new shape over the old one
+c) Tests:
+Check if the previous shape is preserved by attempting another call of the draw shape function
+Check if the new shape is drawn properly in the presence of the previous drawing
+ 
+d) Assignee:
+- Gabriel: TBD
+- Justin: TBD
+- Kyle: TBD
+ 
+e) Estimation: 4 Days
+ 
+f) Priority: 8
+ 
+g) Done:
+A new shape is able to be drawn atop an older shape
+
+---- USER STORY #5 ----
+#5 As a user, I can change the color of shapes .
+a) Description:
+- Being able to color coordinate shapes via the program
+- Assigning the color to the shape at the beginning but still being able to change later 
+
+b) Tasks:
+- Assign a color to the shape upon creation
+- Set up an interface to allow the user to change the color of the shape
+
+c) Tests:
+- Test whether or not shapes are assigned a color at the start
+- Test whether or not the change of color gets applied after changed by the user
+
+d) Assignee:
+- Kyle: TBD
+- Gabriel: TBD
+- Justin: TBD
+ 
+e) Estimation:
+- 5 Days
+ 
+f) Priority:
+- 10 
+g) Done: The user is able to, upon creating a shape, assign a color at the very start. After the shape has been made, if the user wants to change the color of the shape, they can open an interface to change the color of the shape..
+
+
+---- USER STORY #6 ----
+#6 As an administrator, I can add and remove shapes.
+a) Description:
+An administrator can add a new shape or remove a shape. 
+“Add Shape” and “Remove Shape” buttons should be visible on the window.
+Regular users can’t add or remove a shape.
+ 
+b) Tasks:
+Add “Add Shape” and “Remove Shape” options.
+In the “Add Shape” window, display a form where the administrator can enter valid properties for the new shape to be added.
+Ask for the confirmation from the administrator before adding the new shape to the file.
+Load the new shape on the window.
+In the “Remove Shape” window, display the existing shapes to the administrator.
+Ask for the confirmation from the administrator before deleting a shape.
+Reload the window, display all the existing shapes without the deleted shape. 
+
+c) Tests:
+Confirm that “Add shape” and “Remove Shape” are only visible to the administrator.
+Confirm the add and remove tasks are proceeded after asking for confirmation from the administrator.
+Confirm that the form is displayed correctly for the administrator to specify its properties like width and height.
+Confirm that all the existing shapes are listed correctly to the administrator as options to be selected.
+Confirm the “Add Shape” correctly writes the new shape’s properties to the file and displays it along with the existing shapes.
+Confirm that “Remove Shape” correctly removes that specified shape from the file while listing the remaining shapes in the file. 
+ 
+d) Assignee:
+Name: Create “Add Shape” and “Remove Shape” options.
+Name: Update the shape file after a shape is added.
+Name: Make sure the program runs properly after adding and removing a shape multiple times on the same window.
+ 
+e) Estimation: 5 Days
+ 
+f) Priority: 4
+ 
+g) Done:
+An administrator successfully adds a shape into the shape file by performing the essential task, declaring the shape’s properties.
+An administrator successfully removes a shape from the file without affecting the other existing shapes.
+
+
+---- USER STORY #7 ----
+#7 As a user, I can take the area of the shape.
+a) Description:
+ - Can compute the area of the shape based off of the dimensions inputted in upon creation of the shape
+- Done via a button press and can be done at anypoint after creation
+
+b) Tasks:
+ - Create the code to compute the area of the shape based on it’s class
+- Able to tell if the chosen shape does not have an area (ie. it is a line/text) and tell the user
+- Create an interface for the user that allows them to request the area
+
+c) Tests:
+- Tests whether it can tell if the shape is able to have an area or if it is an object like a line or text
+- Test whether or not the correct area is returned to the user based on the shape and the dimensions input 
+ 
+d) Assignee:
+- Kyle: TBD
+- Gabriel: TBD
+- Justin: TBD
+ 
+e) Estimation: 4
+ 
+f) Priority: 4
+ 
+g) Done: The user can find the area of any of the shapes, so long as the shape has an area. If the shape doesn’t have an area than that information is returned to the user as well
+
+
+---- USER STORY #8 ----
+#8 As a user, I can specify the shape I want to render.
+a) Description:
+User can enter which shape they want to render
+Possible menu or display is shown, and user can enter what shape they want
+ 
+b) Tasks:
+Create menu for all the shape options
+Get user input, create a box in window which the user can enter there choice
+c) Tests:
+Check if valid shape (exception handling)
+Shape limit, so program does not break
+Shape limit can be changed by admin
+ 
+d) Assignee:
+- Harris and Jade.
+ 
+e) Estimation: 1 Day
+ 
+f) Priority: 2
+
+g) Done:
+A clear menu is displayed for the user listing all shapes, users can enter their shape, and handle invalid input.
+
+
+---- USER STORY #9 ----
+#9 As a user, I can calculate the perimeter.
+a) Description:
+The user will be able to calculate the perimeter of the shape that was draw based off of the dimensions that the user input
+ 
+b) Tasks:
+Access the private member variables for the dimensions of a shape
+Write a virtual function for calculate perimeter that overrides a pure virtual function, and calculate the perimeter of the shape
+Display the calculated perimeter
+Create exceptions for negative values
+ 
+c) Tests:
+Check if the function properly overrides the pure virtual function
+Try calculating the perimeter for different types of shapes
+Check if exceptions for negative values work
+ 
+d) Assignee:
+- Harris and Jade.
+ 
+e) Estimation: 3 days
+ 
+f) Priority: 4
+ 
+g) Done:
+The shape’s perimeter is properly calculated, and the exceptions for negative values work properly
+
+
+---- USER STORY #10 ----
+#10 As a user, I can view a shape listing report sorted by ID.
+a) Description:
+Users can access the shape report by clicking on a separate tab (or button).
+“Sort by ID” is visible to the users as an option to generate a shape listing report of all shapes.
+The report displays all the existing shapes currently stored in the library including their properties.
+
+b) Tasks:
+Implement shape report function.
+Add a “Sort by ID” tab or button. Here, if the library has no shapes, nothing should be displayed or a message, e.g. “The library is empty”, should be output instead.
+Otherwise, listing all the shapes in ascending order by their ID.
+ 
+c) Tests:
+Verify that the report properly displays all the existing shapes in a correct order along with their properties.
+Nothing is shown if there is nothing in the library; otherwise, a report should be generated. 
+ 
+d) Assignee:
+- Jade: Implement the sort function and verify the report prints out the shapes and their properties
+- Harris: Test the function multiple times to make sure the algorithm runs correctly and confirm that nothing is affected by the sort function. 
+ 
+e) Estimation: ~ 3 days
+ 
+f) Priority: 6
+ 
+g) Done:
+Users can navigate to the report option.
+A shape listing report sorted by ID is generated only when there are shapes in the library.
