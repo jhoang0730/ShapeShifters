@@ -4,8 +4,8 @@
 #include <iostream>
 using namespace std;
 
-template <typename Type>
-class vector
+template <typename T>
+class Vector
 {
 private:
 
@@ -16,15 +16,15 @@ private:
 public:
 
     /* Constructors */
-    vector();     // default constructor
-    explicit vector(int s);    // alternate constructor
+    Vector();     // default constructor
+    explicit Vector(int s);    // alternate constructor
 
     /* Copy constructor and copy assignment
      * Precondition: vector object
      * Postcondition: the object is copied
      */
-    vector(const vector& otherVector);
-    vector& operator=vector(const vector& otherVector)
+    Vector(const Vector& otherVector);
+    Vector& operator=(const Vector& otherVector)
     {
         T *p = new T[otherVector.size_v];       // allocate new space
         copy(otherVector.elem, otherVector.elem + otherVector.size_v, p); // copy elements - std::copy() algorithm
@@ -38,14 +38,14 @@ public:
      * Precondition: <none>
      * Postcondition: the object is moved and deallocate old memory
      */
-    vector(const vector&& otherVector) noexcept;    // move constructor
-    vector& operator=vector(const vector&& otherVector) noexcept; // move assignment
+    Vector(const Vector&& otherVector) noexcept;    // move constructor
+    Vector& operator=(const Vector&& otherVector) noexcept; // move assignment
 
     /* Destructor
      * Precondition: <none>
      * Postcondition: the object is deallocated
      */
-    ~vector() {delete[] elem;}
+    ~Vector() {delete[] elem;}
 
     /* operator[] function */
     T& operator[] (int n) const { return elem[n]; }    // access: return reference
@@ -111,7 +111,7 @@ public:
         return &elem[size_v];
     }
 
-    iterator insert(iterator p, const T& v) { // insert a new element v before p
+    iterator insert(iterator p, const T& val) { // insert a new element v before p
         int index = p - begin();
 
         if (size() == capacity())
@@ -140,7 +140,7 @@ public:
 };
 
 template <typename T>
-vector<T>::vector()
+Vector<T>::Vector()
 {
     size_v = 0;
     space = 0;
@@ -148,7 +148,7 @@ vector<T>::vector()
 }
 
 template <typename T>
-vector<T>::vector(int s)
+Vector<T>::Vector(int s)
 {
     size_v = s;
     space = s;
@@ -160,7 +160,7 @@ vector<T>::vector(int s)
 }
 
 template <typename T>
-vector<T>::vector(const vector &otherVector)
+Vector<T>::Vector(const Vector &otherVector)
 {
     size_v = otherVector.size_v;
     elem = new T[otherVector.size_v];
@@ -170,19 +170,7 @@ vector<T>::vector(const vector &otherVector)
 }
 
 template <typename T>
-int vector<T>::size() const
-{
-    return size_v;
-}
-
-template <typename T>
-int vector<T>::capacity() const
-{
-    return space;
-}
-
-template <typename T>
-void vector<T>::reserve(int capacity)
+void Vector<T>::reserve(int capacity)
 {
     T *temp;
     // never decrease allocation
@@ -192,47 +180,26 @@ void vector<T>::reserve(int capacity)
     // allocate new space
     temp = new T[size_v];
     for (int i = 0; i < size_v; i++)
-    {
         temp[i] = elem[i];
-    }
+
 
     delete[] elem;
     elem = new T[space];
     // copy old elements
     for (int i = 0; i < space; i++)
-    {
         elem[i] = temp[i];
-    }
+
     // deallocate old space
     delete[] temp;
 }
 
 template<typename T>
-void vector<T>::resize(int newsize)
+void Vector<T>::resize(int newsize)
 {
     reserve(newsize);
     for (int i = size_v; i < newsize; ++i)
         elem[i] = 0; // initialize new elements
     size_v = newsize;
-}
-
-template <typename T>
-void vector<T>::reserve(int newalloc) {
-    // never decrease allocation
-    if (space < newalloc)
-    {
-    // allocate new space
-    double* ptr = new double[newalloc];
-
-    // copy old elements
-    for(int i = 0; i < size_v; i++)
-    ptr[i] = elem[i];
-
-    // deallocate old space
-    delete[] elem;
-    elem = ptr;
-    space = newalloc;
-    }
 }
 
 #endif /* VECTOR_H_ */
