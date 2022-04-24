@@ -2,7 +2,7 @@
 #define CIRCLE_H
 
 #include <iostream>
-#include <math.h>
+#include <cmath.h>
 #include <QWidget>
 #include <QPen>
 #include <QBrush>
@@ -10,7 +10,6 @@
 #include <QPainter>
 #include <QPoint>
 #include "shape.h"
-#include <cmath>
 using namespace std;
 
 class Circle : public Shape
