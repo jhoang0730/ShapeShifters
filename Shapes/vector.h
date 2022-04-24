@@ -1,144 +1,238 @@
+#ifndef VECTOR_H_
+#define VECTOR_H_
+
 #include <iostream>
 using namespace std;
 
-template<class T> 
-class vector 
-{ 
- private:
- 
-   int size_v;     // the size 
-   T* elem;     // a pointer to the elements 
-   int space;     // size+free_space 
-   
-  public: 
-  
-   vector() : size_v{0}, elem{nullptr}, space{0};     // default constructor 
-   
-   explicit vector(int s) : size_v{s}, elem{new vector[s]}, space{s} // alternate constructor
-    {
-        for (int i = 0; i < size_v; ++i)
-            elem[i] = 0;
-    }
-   
-   vector(const vector& copiedShape) : size_v{copiedShape.size_v}, elem{new vector[copiedShape.size_v]}, space{copiedShape.space} // copy constructor
-    {
-        copy(copiedShape.elem, copiedShape.elem + size_v, elem);   // copy constructor 
-    }
+template <typename Type>
+class vector
+{
+private:
 
-   vector& operator=vector(const vector& copiedShape)  // copy assignment 
-   {
-        vector *p = new vector[copiedShape.size_v];       // allocate new space
-        copy(copiedShape.elem, copiedShape.elem + copiedShape.size_v, p); // copy elements - std::copy() algorithm
+    int size_v;     // the size
+    T* elem;     // a pointer to the elements
+    int space;     // size+free_space
+
+public:
+
+    /* Constructors */
+    vector();     // default constructor
+    explicit vector(int s);    // alternate constructor
+
+    /* Copy constructor and copy assignment
+     * Precondition: vector object
+     * Postcondition: the object is copied
+     */
+    vector(const vector& otherVector);
+    vector& operator=vector(const vector& otherVector)
+    {
+        T *p = new T[otherVector.size_v];       // allocate new space
+        copy(otherVector.elem, otherVector.elem + otherVector.size_v, p); // copy elements - std::copy() algorithm
         delete[] elem;                            // deallocate old space
         elem = p;                                 // now we can reset elem
-        size_v = copiedShape.size_v;
+        size_v = otherVector.size_v;
         return *this;  // return a self-reference
     }
-   
-   vector(const vector&& movedShape) noexcept    // move constructor
-   {
-       size_v = movedShape.size_v;
-       elem = new vector;
-       *elem = *movedShape.elem;
 
-       delete[] movedShape.elem;
-   } 
-   
-   vector& operator=vector(const vector&& movedShape) noexcept // move assignment
-   {
-       delete[] this->elem;
-       this->copy(movedShape);
-       delete[] movedShape.elem;
-       return this*;
-   } 
-   
-   ~vector()  // destructor 
-   {
-       delete[] elem;
-   }  
-   
-   T& operator[] (int n)    // access: return reference 
-   {
-       return elem[n];
-   }
-   
-   const T& operator[] (int n)    // access: return reference 
-   {
-       return elem[n];
-   }
-   
-   int size() const    // the current size 
-   {
-       return size_v;
-   }
-   
-   int capacity() const     // current available space 
-   {
-       return space;
-   }
-   
-   void resize(int newsize)   // grow 
-   {
-        reserve(newsize);
-        for (int i = size_v; i < newsize; ++i)
-            elem[i] = 0; // initialize new elements
-        size_v = newsize;
-    }
-   
-   void push_back(T val)   // add element 
-   {
+    /* Move constructor and move assignment
+     * Precondition: <none>
+     * Postcondition: the object is moved and deallocate old memory
+     */
+    vector(const vector&& otherVector) noexcept;    // move constructor
+    vector& operator=vector(const vector&& otherVector) noexcept; // move assignment
+
+    /* Destructor
+     * Precondition: <none>
+     * Postcondition: the object is deallocated
+     */
+    ~vector() {delete[] elem;}
+
+    /* operator[] function */
+    T& operator[] (int n) const { return elem[n]; }    // access: return reference
+    const T& operator[] (int n) { return elem[n]; }    // access: return reference
+
+    /* Functions return integer private data members
+     * Precondition: <none>
+     * Postcondition: return size_v or space
+     */
+    int size() const { return size_v; }    // the current size
+    int capacity() const { return space; }     // current available space
+
+    /* Function to make the vector have newsize elements and initialize each new element with the default value 0.0
+     * Precondition: int newsize
+     * Postcondition: assign current size to newsize
+     */
+    void resize(int newsize);
+
+    /* Function to add an element
+     * Precondition: T val
+     * Postcondition: an element is added
+     */
+    void push_back(T val)
+    {
         if (space == 0)
-            reserve(8);         // start with space for 8 elements
+        reserve(8);         	// start with space for 8 elements
         else if (size_v == space)
-            reserve(2 * space); // get more space
-        elem[size_v] = d;       // add d at end
+        reserve(2 * space); 	// get more space
+        elem[size_v] = val;     // add d at end
         ++size_v;               // increase the size (size_v is the number of elements)
     }
-   
-   void reserve(int newalloc);    // get more space 
-   {
-       return nullptr; // temp remove & replace
-   } 
-   
-   using iterator = T*; 
-   
-   using const_iterator = const T*; 
-   
-   iterator begin()   // points to first element
-   {
+
+    /* Function to get more space
+     * Precondition: int newalloc
+     * Postcondition: more space is added
+     */
+    void reserve(int newalloc);
+
+    using iterator = T*;
+    using const_iterator = const T*;
+
+    iterator begin() {   // points to first element
         if (size_v == 0)
-            return nullptr;
+        return nullptr;
         return &elem[0];
     }
-   
-   const_iterator begin() const
-   {
+
+    const_iterator begin() const {
         if (size_v == 0)
-            return nullptr;
+        return nullptr;
         return &elem[0];
-    }  
-   
-   iterator end()   // points to one beyond the last element 
-   {
+    }
+
+    iterator end() {   // points to one beyond the last element
         if (size_v == 0)
-            return nullptr;
+        return nullptr;
         return &elem[size_v];
     }
-   
-   const_iterator end() const
-   {
+
+    const_iterator end() const {
         if (size_v == 0)
-            return nullptr;
+        return nullptr;
         return &elem[size_v];
-    } 
-   
-   iterator insert(iterator p, const T& v) // insert a new element v before p 
-   {
-       return nullptr; // temp remove & replace
-   }
-   
-   iterator erase(iterator p)    // remove element pointed to by p 
-   {
-   return nullptr; // temp remove & replace
-   }
-}; 
+    }
+
+    iterator insert(iterator p, const T& v) { // insert a new element v before p
+        int index = p - begin();
+
+        if (size() == capacity())
+        reserve(size() = 0 ? 8 : 2 * size());
+
+        ++size_v;
+
+        iterator pp = begin() + index;
+
+        for (iterator pos = end() - 1; pos != pp; --pos)
+            *pos = *(pos - 1);
+
+        *(begin() + index) = val;
+        return pp;
+    }
+
+    iterator erase(iterator p) {    // remove element pointed to by p
+        if (p == end())
+        return p;
+
+        for (iterator pos = p + 1; pos != end(); ++pos)	*(pos - 1) = *pos;
+
+        --size_v;
+        return p;
+    }
+};
+
+template <typename T>
+vector<T>::vector()
+{
+    size_v = 0;
+    space = 0;
+    elem = nullptr;
+}
+
+template <typename T>
+vector<T>::vector(int s)
+{
+    size_v = s;
+    space = s;
+    elem = new T[size_v];
+
+    for (int i = 0; i < size_v; i++)
+        elem[i] = T{};
+
+}
+
+template <typename T>
+vector<T>::vector(const vector &otherVector)
+{
+    size_v = otherVector.size_v;
+    elem = new T[otherVector.size_v];
+    space = otherVector.space;
+
+    copy(otherVector.elem, otherVector.elem + size_v, elem); // copy elements using std::copy() algorithm
+}
+
+template <typename T>
+int vector<T>::size() const
+{
+    return size_v;
+}
+
+template <typename T>
+int vector<T>::capacity() const
+{
+    return space;
+}
+
+template <typename T>
+void vector<T>::reserve(int capacity)
+{
+    T *temp;
+    // never decrease allocation
+
+    space = capacity;
+
+    // allocate new space
+    temp = new T[size_v];
+    for (int i = 0; i < size_v; i++)
+    {
+        temp[i] = elem[i];
+    }
+
+    delete[] elem;
+    elem = new T[space];
+    // copy old elements
+    for (int i = 0; i < space; i++)
+    {
+        elem[i] = temp[i];
+    }
+    // deallocate old space
+    delete[] temp;
+}
+
+template<typename T>
+void vector<T>::resize(int newsize)
+{
+    reserve(newsize);
+    for (int i = size_v; i < newsize; ++i)
+        elem[i] = 0; // initialize new elements
+    size_v = newsize;
+}
+
+template <typename T>
+void vector<T>::reserve(int newalloc) {
+    // never decrease allocation
+    if (space < newalloc)
+    {
+    // allocate new space
+    double* ptr = new double[newalloc];
+
+    // copy old elements
+    for(int i = 0; i < size_v; i++)
+    ptr[i] = elem[i];
+
+    // deallocate old space
+    delete[] elem;
+    elem = ptr;
+    space = newalloc;
+    }
+}
+
+#endif /* VECTOR_H_ */
