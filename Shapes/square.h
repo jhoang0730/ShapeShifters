@@ -17,7 +17,7 @@ class Square : public Shape
 public:
     /* Public data members */
     QPen   square_pen;
-    QBrush brush;
+    QBrush square_brush;
     QPoint top_left;
     QPoint bottom_right;
 
