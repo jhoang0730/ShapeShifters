@@ -2,7 +2,7 @@
 #define CIRCLE_H
 
 #include <iostream>
-#include <cmath.h>
+#include <math.h>
 #include <QWidget>
 #include <QPen>
 #include <QBrush>
