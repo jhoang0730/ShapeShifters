@@ -23,8 +23,8 @@ public:
     std::vector<QPoint> vpoints;
 
      /* Constructors */
-    Line( int xId );
     Line();                                 // default constructor
+    Line( int xId );
     Line& operator=(const Line&) = delete;  // Disallow copying
     Line(const Line&) = delete;             // Disallow copying
     Line(QPaintDevice*      pdevice,         // Constructor with parameters
