@@ -1,4 +1,5 @@
 #include "shape.h"
+#include "./ui_shape.h"
 
 /* Constructor with parameters */
 Shape::Shape( QPaintDevice *pdevice, int assign_id, ShapeType assign_type, QPen assign_pen, QBrush assign_brush )       // Copy constructor with parameters
