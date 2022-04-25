@@ -22,7 +22,7 @@ public:
     QPoint bottom_right;
 
     /* Constructors */
-    Circle( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
+    Circle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Circle() = delete;         // default constructor
     Circle& operator=(const Circle&) = delete;  // Disallow copying
     Circle(const Circle&) = delete;
