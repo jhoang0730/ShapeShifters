@@ -39,7 +39,7 @@ public:
             int                top_lefty,
             int                assign_side);
 
-    /* Destrcutor */
+     /* Constructors */
     ~Square() {}
 
     /* Print function
@@ -68,5 +68,4 @@ public:
     double calcPerimeter() const override;
     double calcArea() const override;
 };
-
 #endif // SQUARE_H_
