@@ -37,17 +37,17 @@ Square::Square( QPaintDevice*      pdevice,             // Constructor with para
 
 std::ostream& Square::print(std::ostream& os) const
 {
-    return os << " Id:" << GetID() << " P:" << calcPerimeter() << " A:" << calcArea();
+    return os << "= Shape's Id:" << GetID() << " and shape's perimeter: " << calcPerimeter() << ", area: " << calcArea();
 }
 
-void Square::sketch(QPaintDevice* device)
+void Square::sketch(QPaintDevice* other)
 {
-    QRect rect1(top_left, bottom_right);
+    QRect draw_rect(top_left, bottom_right);
     QPainter& paint = GetPainter();
-    paint.begin(device);
+    paint.begin(other);
     paint.setPen(square_pen);
     paint.setBrush(square_brush);
-    paint.drawRect(rect1);
+    paint.drawRect(draw_rect);
     paint.setPen(QPen());
     paint.drawText((top_left.x()) - 5, (top_left.y()) - 5, QString::number(this->GetID()));
     paint.end();
@@ -55,12 +55,12 @@ void Square::sketch(QPaintDevice* device)
 
 void Square::move(QPoint &left_side)
 {
-    int deltaX = (left_side.x() - top_left.x());
-    int deltaY = (left_side.y() - top_left.y());
+    int X = (left_side.x() - top_left.x());
+    int Y = (left_side.y() - top_left.y());
 
     top_left = left_side;
-    bottom_right.setX(bottom_right.x() + deltaX);
-    bottom_right.setY(bottom_right.y() + deltaY);
+    bottom_right.setX(bottom_right.x() + X);
+    bottom_right.setY(bottom_right.y() + Y);
 }
 
 void Square::update(void)
@@ -78,3 +78,4 @@ double Square::calcArea() const
 {
     return ( (bottom_right.x()-top_left.x()) * (bottom_right.y()-top_left.y()));
 }
+
