@@ -1,16 +1,19 @@
 #ifndef POLYLINE_H
 #define POLYLINE_H
 
+/* Ultility */
 #include <iostream>
 #include <math.h>
+#include "shape.h"
+using namespace std;
+
+/* Qt libraries */
 #include <QWidget>
 #include <QPen>
 #include <QBrush>
 #include <QFont>
 #include <QPainter>
 #include <QPoint>
-#include "shape.h"
-using namespace std;
 
 class Polyline : public Shape
 {
