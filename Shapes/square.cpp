@@ -71,11 +71,17 @@ void Square::update(void)
 
 double Square::calcPerimeter() const
 {
-    return ( ((bottom_right.x()-top_left.x()) * 2) + ((bottom_right.y()-top_left.y()) * 2));
+    double A = bottom_right.x()-top_left.x();
+    double B = bottom_right.y()-top_left.y();
+    double perimeter = (A*2) + (B*2);
+    return perimeter;
 }
 
 double Square::calcArea() const
 {
-    return ( (bottom_right.x()-top_left.x()) * (bottom_right.y()-top_left.y()));
+    double A = bottom_right.x()-top_left.x();
+    double B = bottom_right.y()-top_left.y();
+    double area = A*B;
+    return area;
 }
 
