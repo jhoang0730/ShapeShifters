@@ -22,8 +22,8 @@ public:
     QPoint bottom_right;
 
     /* Constructors */
-    Circle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Circle() = delete;         // default constructor
+    Circle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Circle& operator=(const Circle&) = delete;  // Disallow copying
     Circle(const Circle&) = delete;
     Circle(QPaintDevice*       pdevice,             // Constructor with parameters
