@@ -30,7 +30,7 @@ Line::Line(  QPaintDevice*      pdevice,         // Constructor with parameters
 
 std::ostream& Line::print(std::ostream& os) const
 {
-    return os << " Id:" << GetID() << " P:" << calcPerimeter() << " A:" << calcArea();
+    return os << "= Shape's Id:" << GetID() << " and shape's perimeter: " << calcPerimeter() << ", area: " << calcArea();
 }
 
 void Line::sketch(QPaintDevice* other)
@@ -46,12 +46,12 @@ void Line::sketch(QPaintDevice* other)
 
 void Line::move(QPoint &left_side)
 {
-    int deltaX = (left_side.x() - left_side.x());
-    int deltaY = (left_side.y() - left_side.y());
+    int X = (left_side.x() - top_left.x());
+    int Y = (left_side.y() - top_left.y());
 
     top_left = left_side;
-    bottom_right.setX(bottom_right.x() + deltaX);
-    bottom_right.setY(bottom_right.y() + deltaY);
+    bottom_right.setX(bottom_right.x() + X);
+    bottom_right.setY(bottom_right.y() + Y);
 }
 
 
