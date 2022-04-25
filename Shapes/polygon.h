@@ -23,8 +23,8 @@ public:
     vector<QPoint> vpoints;
 
     /* Constructors */
-    Polygon( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Polygon() = delete;         // default constructor
+    Polygon( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Polygon& operator=(const Polygon&) = delete;  // Disallow copying
     Polygon(const Polygon&) = delete;
     Polygon( QPaintDevice*      pdevice,             // Constructor with parameters
