@@ -22,7 +22,7 @@ public:
     QPoint bottom_right;
 
     /* Constructors */
-    Ellipse( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
+    Ellipse( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Ellipse() = delete;         // default constructor
     Ellipse& operator=(const Ellipse&) = delete;  // Disallow copying
     Ellipse(const Ellipse&) = delete;
