@@ -70,3 +70,4 @@ public:
     double calcArea() const override;
 };
 #endif // ELLIPSE_H_
+
