@@ -77,13 +77,14 @@ double Ellipse::calcPerimeter() const
 {
     double A = ((bottom_right.x()-top_left.x()));
     double B = ((bottom_right.y()-top_left.y()));
-
     double perimeter = ( (M_PI) * (3*(A-B)) - (sqrt(((3*A)+B) * (A+(3*B)))) );
-
     return perimeter;      // using PI constant and applying Ramanujan Forumla to find perimeter
 }
 
 double Ellipse::calcArea() const
 {
-    return ( ( (bottom_right.x()-top_left.x()) / 2) * ( (bottom_right.y()-top_left.y()) / 2) * M_PI);      // using PI constant
+    double A = ((bottom_right.x()-top_left.x()));
+    double B = ((bottom_right.y()-top_left.y()));
+    double area = ( ( A / 2) * ( B / 2) * M_PI);
+    return area;      // using PI constant
 }
