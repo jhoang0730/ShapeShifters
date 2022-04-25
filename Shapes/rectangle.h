@@ -1,16 +1,19 @@
 #ifndef RECTANGLE_H_
 #define RECTANGLE_H_
 
+/* Ultility */
 #include <iostream>
 #include <math.h>
+#include "shape.h"
+using namespace std;
+
+/* Qt libraries */
 #include <QWidget>
 #include <QPen>
 #include <QBrush>
 #include <QFont>
 #include <QPainter>
 #include <QPoint>
-#include "shape.h"
-using namespace std;
 
 class Rectangle : public Shape
 {
