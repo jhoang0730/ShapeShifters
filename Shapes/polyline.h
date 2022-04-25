@@ -23,7 +23,7 @@ public:
 
     /* Constructors */
     Polyline() = delete;         // default constructor
-    Polyline( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
+    Polyline( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Polyline& operator=(const Polyline&) = delete;  // Disallow copying
     Polyline(const Polyline&) = delete;
     Polyline(QPaintDevice*      pdevice,         // Constructor with parameters
