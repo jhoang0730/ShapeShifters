@@ -22,9 +22,8 @@ public:
     std::vector<QPoint> vpoints;
 
     /* Constructors */
-    Polyline( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
-
     Polyline() = delete;         // default constructor
+    Polyline( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
     Polyline& operator=(const Polyline&) = delete;  // Disallow copying
     Polyline(const Polyline&) = delete;
     Polyline(QPaintDevice*      pdevice,         // Constructor with parameters
