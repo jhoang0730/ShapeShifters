@@ -1,5 +1,8 @@
 #include "polygon.h"
 
+Polygon::Polygon( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush )
+    : Shape (pdevice, assign_id, ShapeType::Polygon, assign_pen, assign_brush) {}
+
 Polygon::Polygon(QPaintDevice*       pdevice,             // Constructor with parameters
         int                assign_id,
         QColor             assign_pen_color,
@@ -25,7 +28,7 @@ Polygon::Polygon(QPaintDevice*       pdevice,             // Constructor with pa
     polygon_brush.setStyle(assign_brushstyle);
 
     /* Setting up point */
-
+    // Need implementation
 }
 
 std::ostream& Polygon::print(std::ostream& os) const
@@ -65,21 +68,17 @@ void Polygon::update(void)
 double Polygon::calcPerimeter() const
 {
     double perimeter = 0;
-        for(std::vector<QPoint>::const_iterator i=vpoints.begin();i<vpoints.end()-1;++i)
-        {
-
-            perimeter += sqrt((pow((i->x()-((i+1)->x())),2)+pow((i->y()-(i+1)->y()),2)));
-        }
-        return perimeter;
+    for(std::vector<QPoint>::const_iterator i=vpoints.begin();i<vpoints.end()-1;++i)
+    {
+       perimeter += sqrt((pow((i->x()-((i+1)->x())),2)+pow((i->y()-(i+1)->y()),2)));   // Need to check again
+    }
+    return perimeter;
 }
 
 double Polygon::calcArea() const
 {
     std::vector<QPoint>::const_iterator i=vpoints.begin();
-        double area = ((calcPerimeter())*
-                       ((sqrt((pow((i->x()-((i+1)->x())),2)+
-                               pow((i->y()-(i+1)->y()),2))))/
-                        (2*tan(180/vpoints.size()))))/2;
-        return area;
+    double area = ((calcPerimeter())*((sqrt((pow((i->x()-((i+1)->x())),2)+pow((i->y()-(i+1)->y()),2))))/(2*tan(180/vpoints.size()))))/2; // Need to check again
+    return area;
 }
 
