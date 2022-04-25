@@ -74,3 +74,4 @@ public:
     double calcArea() const override;
 };
 #endif // TEXT_H_
+
