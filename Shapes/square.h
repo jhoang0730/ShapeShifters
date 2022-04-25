@@ -22,8 +22,8 @@ public:
     QPoint bottom_right;
 
      /* Constructors */
-    Square( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Square() = delete;                          // default constructor
+    Square( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Square& operator=(const Square&) = delete;  // Disallow copying
     Square(const Square&) = delete;             // Disallow copying
     Square(QPaintDevice*       pdevice,             // Constructor with parameters
