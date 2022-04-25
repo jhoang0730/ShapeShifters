@@ -22,9 +22,8 @@ public:
     QPoint bottom_right;
 
      /* Constructors */
-    Rectangle( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
-
     Rectangle() = delete;         // default constructor
+    Rectangle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Rectangle& operator=(const Rectangle&) = delete;  // Disallow copying
     Rectangle(const Rectangle&) = delete;
     Rectangle( QPaintDevice*       pdevice,             // Constructor with parameters
