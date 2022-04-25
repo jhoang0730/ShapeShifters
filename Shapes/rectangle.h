@@ -71,3 +71,4 @@ public:
     double calcArea() const override;
 };
 #endif // RECTANGLE_H_
+
