@@ -11,21 +11,26 @@ using namespace std;
 #include <QFont>
 #include <QPainter>
 #include <QPoint>
+#include <QMainWindow>
 
-class Shape {
+QT_BEGIN_NAMESPACE
+namespace Ui { class shape; }
+QT_END_NAMESPACE
+
+class Shape : public QMainWindow
+{
+    Q_OBJECT
+
 public:
-    /* Public data members */
-
-
     // Shape Types
     enum class ShapeType {NoShape, Line, Polyline, Polygon, Rectangle, Square, Ellipse, Circle, Text};
 
     /* Constructors */
-    Shape() = delete;         // Default constructor
+    Shape() = delete;         // default constructor
     Shape( QPaintDevice *pdevice, int assign_id, ShapeType assign_type) : device{pdevice}, shapeID{assign_id}, shape_type{assign_type} {}
     Shape( QPaintDevice *pdevice, int assign_id, ShapeType assign_type, QPen assign_pen, QBrush assign_brush );       // Copy constructor with parameters
     Shape& operator=(const Shape&) = delete;  // Disallow copying
-    Shape(const Shape&) = delete;             // Disallow copying
+    Shape(const Shape&) = delete;
 
     // Virtual Destructor
     virtual ~Shape() {}
@@ -81,6 +86,7 @@ public:
     virtual double calcArea(void) const = 0;
 
 private:
+    Ui::shape *ui;
     QPaintDevice *device;
     int shapeID;
     ShapeType shape_type;   // type of shape, from the enum shapeType
@@ -88,5 +94,4 @@ private:
     QBrush brush;
     QPainter *painter;
 };
-
-#endif /* SHAPE_H_ */
+#endif // SHAPE_H
