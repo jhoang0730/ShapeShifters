@@ -69,4 +69,3 @@ public:
     double calcArea() const override;
 };
 #endif // CIRCLE_H
-
