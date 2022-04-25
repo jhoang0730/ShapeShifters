@@ -1,16 +1,19 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
+/* Ultility */
 #include <iostream>
 #include <math.h>
+#include "shape.h"
+using namespace std;
+
+/* Qt libraries */
 #include <QWidget>
 #include <QPen>
 #include <QBrush>
 #include <QFont>
 #include <QPainter>
 #include <QPoint>
-#include "shape.h"
-using namespace std;
 
 class Circle : public Shape
 {
@@ -22,11 +25,11 @@ public:
     QPoint bottom_right;
 
     /* Constructors */
-    Circle() = delete;         // default constructor
+    Circle() = delete;                          // default constructor
     Circle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush );
     Circle& operator=(const Circle&) = delete;  // Disallow copying
     Circle(const Circle&) = delete;
-    Circle(QPaintDevice*       pdevice,             // Constructor with parameters
+    Circle(QPaintDevice*       pdevice,         // Constructor with parameters
             int                assign_id,
             QColor             assign_pen_color,
             qreal              assign_pen_width,
