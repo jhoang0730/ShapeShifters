@@ -67,3 +67,4 @@ public:
     double calcArea() const override;
 };
 #endif // POLYLINE_H
+
