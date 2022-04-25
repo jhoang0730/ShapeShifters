@@ -20,6 +20,7 @@ public:
     QBrush polygon_brush;
     QPoint top_left;
     QPoint bottom_right;
+    vector<QPoint> vpoints;
 
     /* Constructors */
     Polygon( QPaintDevice *pdevice, int xId, QPen xpen, QBrush xbrush );
