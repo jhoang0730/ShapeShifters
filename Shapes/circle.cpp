@@ -1,5 +1,8 @@
 #include "circle.h"
 
+Circle::Circle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush )
+    : Shape (pdevice, assign_id, ShapeType::Circle, assign_pen, assign_brush) {}
+
 Circle::Circle(QPaintDevice*       pdevice,             // Constructor with parameters
         int                assign_id,
         QColor             assign_pen_color,
