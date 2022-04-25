@@ -1,16 +1,19 @@
 #ifndef POLYGON_H_
 #define POLYGON_H_
 
+/* Ultility */
 #include <iostream>
 #include <math.h>
+#include "shape.h"
+using namespace std;
+
+/* Qt libraries */
 #include <QWidget>
 #include <QPen>
 #include <QBrush>
 #include <QFont>
 #include <QPainter>
 #include <QPoint>
-#include "shape.h"
-using namespace std;
 
 class Polygon : public Shape
 {
