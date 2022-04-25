@@ -71,11 +71,15 @@ void Circle::update(void)
 
 double Circle::calcPerimeter() const
 {
-     return ( (M_PI) * (bottom_right.x()-top_left.x()) );      // using PI constant
+     double A = bottom_right.x()-top_left.x();
+     double perimeter = (M_PI) * A;
+     return perimeter;      // using PI constant
 }
 
 double Circle::calcArea() const
 {
-    return ( pow( ( (bottom_right.x()-top_left.x()) /2) ,2 ) * M_PI);      // using pow() function and PI constant
+    double A = bottom_right.x()-top_left.x();
+    double area = pow( (A/2),2 ) * M_PI;
+    return area;      // using pow() function and PI constant
 }
 
