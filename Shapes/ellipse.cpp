@@ -1,18 +1,21 @@
 #include "ellipse.h"
 
-Ellipse::Ellipse( QPaintDevice*      pdevice,             // Constructor with parameters
-        int                assign_id,
-        QColor             assign_pen_color,
-        qreal              assign_pen_width,
-        Qt::PenStyle       assign_penstyle,
-        Qt::PenCapStyle    assign_pencap_style,
-        Qt::PenJoinStyle   assign_penjoin_style,
-        QColor             assign_burshcolor,
-        Qt::BrushStyle     assign_brushstyle,
-        int                top_leftx,
-        int                top_lefty,
-        int                assign_width,
-        int                assign_height)
+Ellipse::Ellipse( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush )
+    : Shape (pdevice, assign_id, ShapeType::Ellipse, assign_pen, assign_brush) {}
+
+Ellipse::Ellipse(QPaintDevice*     pdevice,             // Constructor with parameters
+                int                assign_id,
+                QColor             assign_pen_color,
+                qreal              assign_pen_width,
+                Qt::PenStyle       assign_penstyle,
+                Qt::PenCapStyle    assign_pencap_style,
+                Qt::PenJoinStyle   assign_penjoin_style,
+                QColor             assign_burshcolor,
+                Qt::BrushStyle     assign_brushstyle,
+                int                top_leftx,
+                int                top_lefty,
+                int                assign_width,
+                int                assign_height)
     : Shape (pdevice, assign_id, ShapeType::Ellipse)
 {
     /* Assigning "pen" properties */
