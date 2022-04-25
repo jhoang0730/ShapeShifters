@@ -1,5 +1,8 @@
 #include "rectangle.h"
 
+Rectangle::Rectangle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush )
+    : Shape (pdevice, assign_id, ShapeType::Rectangle, assign_pen, assign_brush) {}
+
 Rectangle::Rectangle(   QPaintDevice*      pdevice,             // Constructor with parameters
                         int                assign_id,
                         QColor             assign_pen_color,
@@ -69,10 +72,16 @@ void Rectangle::update(void)
 
 double Rectangle::calcPerimeter() const
 {
-    return ( ((bottom_right.x()-top_left.x()) * 2) + ((bottom_right.y()-top_left.y()) * 2));
+    double A = bottom_right.x()-top_left.x();
+    double B = bottom_right.y()-top_left.y();
+    double perimeter = (A * 2) + (B * 2);
+    return perimeter;
 }
 
 double Rectangle::calcArea() const
 {
-    return ( (bottom_right.x()-top_left.x()) * (bottom_right.y()-top_left.y()));
+    double A = bottom_right.x()-top_left.x();
+    double B = bottom_right.y()-top_left.y();
+    double area = A * B;
+    return area;
 }
