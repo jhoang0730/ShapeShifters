@@ -111,7 +111,7 @@ public:
         return &elem[size_v];
     }
 
-    iterator insert(iterator p, const T& val) { // insert a new element v before p
+    iterator insert(iterator p, const T& val) { // insert a new element val before p
         int index = p - begin();
 
         if (size() == capacity())
@@ -166,15 +166,13 @@ Vector<T>::Vector(const Vector &otherVector)
     elem = new T[otherVector.size_v];
     space = otherVector.space;
 
-    copy(otherVector.elem, otherVector.elem + size_v, elem); // copy elements using std::copy() algorithm
+    copy(otherVector.elem, otherVector.elem + size_v, elem); // copying elements using std::copy() algorithm
 }
 
 template <typename T>
 void Vector<T>::reserve(int capacity)
 {
     T *temp;
-    // never decrease allocation
-
     space = capacity;
 
     // allocate new space
@@ -185,7 +183,8 @@ void Vector<T>::reserve(int capacity)
 
     delete[] elem;
     elem = new T[space];
-    // copy old elements
+
+    // copying old elements
     for (int i = 0; i < space; i++)
         elem[i] = temp[i];
 
@@ -198,8 +197,9 @@ void Vector<T>::resize(int newsize)
 {
     reserve(newsize);
     for (int i = size_v; i < newsize; ++i)
-        elem[i] = 0; // initialize new elements
+        elem[i] = 0;            // initializing new elements
     size_v = newsize;
 }
 
 #endif /* VECTOR_H_ */
+
