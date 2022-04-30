@@ -29,10 +29,10 @@ Square::Square( QPaintDevice*      pdevice,             // Constructor with para
     square_brush.setStyle(assign_brushstyle);
 
     /* Setting up point */
-    QPoint ul(top_leftx,top_lefty);
-    top_left = ul;
-    QPoint lr(top_leftx+assign_side, top_leftx+assign_side);
-    bottom_right = lr;
+    QPoint assign_topleft(top_leftx,top_lefty);
+    top_left = assign_topleft;
+    QPoint assign_bottomright(top_leftx+assign_side, top_leftx+assign_side);
+    bottom_right = assign_bottomright;
 }
 
 std::ostream& Square::print(std::ostream& os) const
