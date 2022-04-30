@@ -46,14 +46,10 @@ void Line::sketch(QPaintDevice* other)
 
 void Line::move(QPoint &left_side)
 {
-    int X = (left_side.x() - top_left.x());
-    int Y = (left_side.y() - top_left.y());
-
     top_left = left_side;
-    bottom_right.setX(bottom_right.x() + X);
-    bottom_right.setY(bottom_right.y() + Y);
+    bottom_right.setX(bottom_right.x() + left_side.x() - top_left.x());
+    bottom_right.setY(bottom_right.y() + left_side.y() - top_left.y());
 }
-
 
 void Line::update(void)
 {
