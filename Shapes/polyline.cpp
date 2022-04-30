@@ -7,8 +7,7 @@ Polyline::Polyline(QPaintDevice*    pdevice,         // Constructor with paramet
                  Qt::PenStyle       assign_penstyle,
                  Qt::PenCapStyle    assign_pencap_style,
                  Qt::PenJoinStyle   assign_penjoin_style,
-                 int                top_leftx,
-                 int                top_lefty)
+                 const std::vector<QPoint> assign_points)
      : Shape (pdevice, assign_id, ShapeType::Polyline)
 {
     /* Assigning "pen" properties */
@@ -19,7 +18,45 @@ Polyline::Polyline(QPaintDevice*    pdevice,         // Constructor with paramet
     polyline_pen.setJoinStyle(assign_penjoin_style);
 
     /* Setting up point */
-    // ???
+    vpoints = assign_points;
+
+    qreal x_min = 0;        // qreal - typedef for double
+    qreal y_min = 0;
+    qreal x_max = 0;
+    qreal y_max = 0;
+
+    std::vector<QPoint>::iterator iterate = vpoints.begin();
+
+
+    // Connecting points
+    while (iterate!=vpoints.end()-1) {
+        // Finding the min points
+        if (iterate->x() < x_min)
+        {
+            x_min = iterate->x();
+        }
+        if (iterate->y() < y_min)
+        {
+            y_min = iterate->y();
+        }
+
+        // Finding the max points
+        if (iterate->x() > x_max)
+        {
+            x_max = iterate->x();
+        }
+        if (iterate->y() > y_max)
+        {
+            y_max = iterate->y();
+        }
+        ++iterate;
+    }
+
+    // Setting points
+    top_left.setX(x_min);
+    top_left.setY(y_min);
+    bottom_right.setX(x_max);
+    bottom_right.setY(y_max);
 }
 
 std::ostream& Polyline::print(std::ostream& os) const
@@ -42,14 +79,16 @@ void Polyline::sketch(QPaintDevice* other)
 
 void Polyline::move(QPoint &left_side)
 {
-    int X = (left_side.x() - top_left.x());
-    int Y = (left_side.y() - top_left.y());
-
     top_left = left_side;
-    bottom_right.setX(bottom_right.x() + X);
-    bottom_right.setY(bottom_right.y() + Y);
+    bottom_right.setX(bottom_right.x() + left_side.x() - top_left.x());
+    bottom_right.setY(bottom_right.y() + left_side.y() - top_left.y());
 
-    // Moving points??
+    // Moving points
+    std::vector<QPoint>::iterator iterate = vpoints.begin();
+    while (iterate!=vpoints.end()-1) {
+        iterate->setX(iterate->x() + left_side.x() - top_left.x());
+        iterate->setY(iterate->y() + left_side.y() - top_left.y());
+    }
 }
 
 
