@@ -1,8 +1,5 @@
 #include "rectangle.h"
 
-Rectangle::Rectangle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush )
-    : Shape (pdevice, assign_id, ShapeType::Rectangle, assign_pen, assign_brush) {}
-
 Rectangle::Rectangle(   QPaintDevice*      pdevice,             // Constructor with parameters
                         int                assign_id,
                         QColor             assign_pen_color,
@@ -56,12 +53,9 @@ void Rectangle::sketch(QPaintDevice* other)
 
 void Rectangle::move(QPoint &left_side)
 {
-    int X = (left_side.x() - top_left.x());
-    int Y = (left_side.y() - top_left.y());
-
     top_left = left_side;
-    bottom_right.setX(bottom_right.x() + X);
-    bottom_right.setY(bottom_right.y() + Y);
+    bottom_right.setX(bottom_right.x() + left_side.x() - top_left.x());
+    bottom_right.setY(bottom_right.y() + left_side.y() - top_left.y());
 }
 
 void Rectangle::update(void)
@@ -72,16 +66,10 @@ void Rectangle::update(void)
 
 double Rectangle::calcPerimeter() const
 {
-    double A = bottom_right.x()-top_left.x();
-    double B = bottom_right.y()-top_left.y();
-    double perimeter = (A * 2) + (B * 2);
-    return perimeter;
+    return ( ((bottom_right.x()-top_left.x()) * 2) + ((bottom_right.y()-top_left.y()) * 2));
 }
 
 double Rectangle::calcArea() const
 {
-    double A = bottom_right.x()-top_left.x();
-    double B = bottom_right.y()-top_left.y();
-    double area = A * B;
-    return area;
+    return ( (bottom_right.x()-top_left.x()) * (bottom_right.y()-top_left.y()));
 }
