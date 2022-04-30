@@ -26,10 +26,10 @@ Circle::Circle(QPaintDevice*       pdevice,             // Constructor with para
     circle_brush.setStyle(assign_brushstyle);
 
     /* Setting up point */
-    QPoint ul(top_leftx,top_lefty);
-    top_left = ul;
-    QPoint lr(top_leftx+assign_diameter, top_lefty+assign_diameter);
-    bottom_right = lr;
+    QPoint assign_topleft(top_leftx,top_lefty);
+    top_left = assign_topleft;
+    QPoint assign_bottomright(top_leftx+assign_diameter, top_lefty+assign_diameter);
+    bottom_right = assign_bottomright;
 }
 
 std::ostream& Circle::print(std::ostream& os) const
