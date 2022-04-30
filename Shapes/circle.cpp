@@ -1,8 +1,5 @@
 #include "circle.h"
 
-Circle::Circle( QPaintDevice *pdevice, int assign_id, QPen assign_pen, QBrush assign_brush )
-    : Shape (pdevice, assign_id, ShapeType::Circle, assign_pen, assign_brush) {}
-
 Circle::Circle(QPaintDevice*       pdevice,             // Constructor with parameters
         int                assign_id,
         QColor             assign_pen_color,
@@ -55,12 +52,9 @@ void Circle::sketch(QPaintDevice* other)
 
 void Circle::move(QPoint &left_side)
 {
-    int X = (left_side.x() - top_left.x());
-    int Y = (left_side.y() - top_left.y());
-
     top_left = left_side;
-    bottom_right.setX(bottom_right.x() + X);
-    bottom_right.setY(bottom_right.y() + Y);
+    bottom_right.setX(bottom_right.x() + left_side.x() - top_left.x());
+    bottom_right.setY(bottom_right.y() + left_side.y() - top_left.y());
 }
 
 void Circle::update(void)
@@ -71,15 +65,11 @@ void Circle::update(void)
 
 double Circle::calcPerimeter() const
 {
-     double A = bottom_right.x()-top_left.x();
-     double perimeter = (M_PI) * A;
-     return perimeter;      // using PI constant
+     return ( (M_PI) * (bottom_right.x()-top_left.x()) );      // using PI constant
 }
 
 double Circle::calcArea() const
 {
-    double A = bottom_right.x()-top_left.x();
-    double area = pow( (A/2),2 ) * M_PI;
-    return area;      // using pow() function and PI constant
+    return ( pow( ( (bottom_right.x()-top_left.x()) /2) ,2 ) * M_PI);      // using pow() function and PI constant
 }
 
