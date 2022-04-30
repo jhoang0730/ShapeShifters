@@ -19,7 +19,7 @@ Line::Line(  QPaintDevice*      pdevice,         // Constructor with parameters
     line_pen.setCapStyle(assign_pencap_style);
     line_pen.setJoinStyle(assign_penjoin_style);
 
-    // object specific transform from points supplied to bounding points
+    // Connecting the points
     QPoint assign_topleft(top_leftx,top_lefty);
     top_left = assign_topleft;
     vpoints.push_back(assign_topleft);
