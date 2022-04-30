@@ -29,10 +29,10 @@ Ellipse::Ellipse(QPaintDevice*     pdevice,             // Constructor with para
     ellipse_brush.setColor(assign_burshcolor);
     ellipse_brush.setStyle(assign_brushstyle);
 
-    QPoint ul(top_leftx,top_lefty);
-    top_left = ul;
-    QPoint lr(top_leftx+assign_width, top_lefty+assign_height);
-    bottom_right = lr;
+    QPoint assign_topleft(top_leftx,top_lefty);
+    top_left = assign_topleft;
+    QPoint assign_bottomright(top_leftx+assign_width, top_lefty+assign_height);
+    bottom_right = assign_bottomright;
 }
 
 std::ostream& Ellipse::print(std::ostream& os) const
