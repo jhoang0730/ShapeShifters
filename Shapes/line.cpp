@@ -20,12 +20,12 @@ Line::Line(  QPaintDevice*      pdevice,         // Constructor with parameters
     line_pen.setJoinStyle(assign_penjoin_style);
 
     // object specific transform from points supplied to bounding points
-    QPoint ul(top_leftx,top_lefty);
-    top_left = ul;
-    vpoints.push_back(ul);
-    QPoint lr(bottom_leftx, bottom_lefty);
-    bottom_right = lr;
-    vpoints.push_back(lr);
+    QPoint assign_topleft(top_leftx,top_lefty);
+    top_left = assign_topleft;
+    vpoints.push_back(assign_topleft);
+    QPoint assign_bottomright(bottom_leftx, bottom_lefty);
+    bottom_right = assign_bottomright;
+    vpoints.push_back(assign_bottomright);
 }
 
 std::ostream& Line::print(std::ostream& os) const
