@@ -16,6 +16,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QRadioButton>
 #include "canvas.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,6 +29,16 @@ public:
     QGroupBox *groupBox;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+    QRadioButton *circleChoice;
+    QRadioButton *squareChoice;
+    QRadioButton *ellipseChoice;
+    QRadioButton *rectangleChoice;
+    QRadioButton *textChoice;
+    QRadioButton *polygonChoice;
+    QRadioButton *polylineChoice;
+    QRadioButton *lineChoice;
+
+
 
     void setupUi(QMainWindow *MainWindow)
     {
