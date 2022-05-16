@@ -378,7 +378,7 @@ Shape* readCircle(Canvas &canvas, ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, bstyle);
 
-	Ellipse *circ = new Ellipse(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l);
+	Circle *circ = new Circle(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l);
 	return circ;
 }
 
@@ -426,7 +426,7 @@ Shape* readText(Canvas &canvas, ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, fweight);
 
-	Text *txt = Text Ellipse(canvas, id, textStr, textColor, getAlignFlag(allignment), fsize, fontfam, getText(fontstyle), getWeight(fweight) x, y, l, w);
+	Text *txt = new Text(canvas, id, textStr, textColor, getAlignFlag(allignment), fsize, fontfam, getText(fontstyle), getWeight(fweight) x, y, l, w);
 	return txt;
 }
 
