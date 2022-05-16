@@ -17,13 +17,13 @@ class LoginScreen : public QMainWindow
     Q_OBJECT
 
 public:
-    LoginScreen(QWidget *parent = nullptr);
-    ~LoginScreen();
+    LoginScreen(QWidget *parent = nullptr); //Constructor
+    ~LoginScreen(); //Destructor
 
-private slots:
+private slots: //Button
     void on_pushButton_clicked();
 
-private:
+private: //Ui object
     Ui::LoginScreen *ui;
 };
 #endif // LOGINSCREEN_H
