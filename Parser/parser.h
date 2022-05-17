@@ -17,18 +17,7 @@ using namespace std;
 #include "circle.h"
 #include "text.h"
 #include "vector.h"
-
-enum ShapeNames
-{
-	LINE = 1,		// Subsequent emurators recieve the value of the previous one +1.
-	POLYLINE,
-	POLYGON,
-	RECTANGLE,
-	SQUARE,
-	ELLIPSE,
-	CIRCLE,
-	TEXT
-}
+#include "canvas.h"
 
 Shape* readLine(ifstream&, int id);
 Shape* readPolyLine(ifstream&, int id);
@@ -47,5 +36,15 @@ Qt::BrushStyle getBrush(const string&);
 Qt::AlignmentFlag getAlignFlag(const string&);
 QFont::Style getText(const string&)
 QFont::Weight getWeight(const string&);
+
+class FileParser
+{
+public:
+	FileParser();
+
+	~FileParser();
+
+	void parseFile(Canvas &canvas);
+}
 
 #endif // Shape_Parser

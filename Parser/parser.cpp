@@ -6,59 +6,64 @@
 #include <QFont>
 #include <QMap>
 
-ifstream inFile;
-inFile.open("shapes.txt");
+FileParser::FileParser() {}
 
-vector<Shape*> parsedShapes;
-int id;
-string buffer;
+FileParser::~FileParser() {}
 
-while (inFile) {
-	int type = 0;
+void FileParser::parseFile(Canvas &canvas) {
+	ifstream inFile;
+	inFile.open("shapes.txt");
 
-	inFile.ignore(1000, ":");
-	inFile >> id;
-	inFile.ignore(1000, ":");
-	inFile >> buffer;
+	int id;
+	string buffer;
 
-	if(inFile.eof()) {
-		break;
+	while (inFile) {
+		int type = 0;
+
+		inFile.ignore(1000, ":");
+		inFile >> id;
+		inFile.ignore(1000, ":");
+		inFile >> buffer;
+
+		if(inFile.eof()) {
+			break;
+		}
+
+		if (buffer == "Line") {
+			canvas.addShape(readLine(inFile, id))
+		}
+		else if (buffer == "Polyline") {
+			//parsedShapes.push_back(readPolyLine(inFile, id));
+		}
+		else if (buffer == "Polygon") {
+			//parsedShapes.push_back(readPolygon(inFile, id));
+		}
+		else if (buffer == "Rectangle") {
+			canvas.addShape(readRectangle(inFile, id));
+		}
+		else if (buffer == "Square") {
+			canvas.addShape(readSquare(inFile, id));
+		}
+		else if (buffer == "Ellipse") {
+			canvas.addShape(readEllipse(inFile, id));
+		}
+		else if (buffer == "Circle") {
+			canvas.addShape(readCircle(inFile, id));
+		}
+		else if (buffer == "Text") {
+			canvas.addShape(readText(inFile, id));
+		}
+		else {
+			cout << "Error";
+		}
+
 	}
 
-	if (buffer == "Line") {
-		parsedShapes.push_back(readLine(inFile, id));
-	}
-	else if (buffer == "Polyline") {
-		parsedShapes.push_back(readPolyLine(inFile, id));
-	}
-	else if (buffer == "Polygon") {
-		parsedShapes.push_back(readPolygon(inFile, id));
-	}
-	else if (buffer == "Rectangle") {
-		parsedShapes.push_back(readRectangle(inFile, id));
-	}
-	else if (buffer == "Square") {
-		parsedShapes.push_back(readSquare(inFile, id));
-	}
-	else if (buffer == "Ellipse") {
-		parsedShapes.push_back(readEllipse(inFile, id));
-	}
-	else if (buffer == "Circle") {
-		parsedShapes.push_back(readCircle(inFile, id));
-	}
-	else if (buffer == "Text") {
-		parsedShapes.push_back(readText(inFile, id));
-	}
-	else {
-		cout << "Error";
-	}
-
+	inFile.close();
+	return parsedShapes;
 }
 
-inFile.close();
-return parsedShapes;
-
-Shape* readLine(ifstream &inFile, int id)
+Shape* readLine(Canvas &canvas, ifstream &inFile, int id)
 {
 	int x, y , x2, y2, width;
 	string color, pen, cap, join;
@@ -94,11 +99,11 @@ Shape* readLine(ifstream &inFile, int id)
 	getline(inFile, style);
 
 	// I don't know what the qpaint device is. 
-	Line *line = new Line(ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), x, y, x2, y2);
+	Line *line = new Line(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), x, y, x2, y2);
 	return line;
 }
 
-Shape* readPolyLine(ifstream &inFile, int id)
+Shape* readPolyLine(Canvas &canvas, ifstream &inFile, int id)
 {
 	int width;
 	string color, pen, cap, join;
@@ -135,11 +140,11 @@ Shape* readPolyLine(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, join);
 
-	Polyline *pline = new Polyline (ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), ERR:CONSTRUCTOR_ONLY_HAS_ONE_SET_OF_POINTS);
+	Polyline *pline = new Polyline (canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), ERR:CONSTRUCTOR_ONLY_HAS_ONE_SET_OF_POINTS);
 	return pline;
 }
 
-Shape* readPolygon(ifstream &inFile, int id)
+Shape* readPolygon(Canvas &canvas, ifstream &inFile, int id)
 {
 	int width;
 	string color, pen, cap, join, bstyle, bcolor;
@@ -185,11 +190,11 @@ Shape* readPolygon(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, bstyle);
 
-	Polygon *pgon = new Polygon(ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), ERR:CONSTRUCTOR_ONLY_HAS_ONE_SET_OF_POINTS);
+	Polygon *pgon = new Polygon(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), ERR:CONSTRUCTOR_ONLY_HAS_ONE_SET_OF_POINTS);
 	return pgon;
 }
 
-Shape* readRectangle(ifstream &inFile, int id)
+Shape* readRectangle(Canvas &canvas, ifstream &inFile, int id)
 {
 	int x, y, l, w, width;
 	string color, pen, cap, join, bstyle, bcolor;
@@ -233,11 +238,11 @@ Shape* readRectangle(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, bstyle);
 
-	Rectangle *rect = new Rectangle(ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l, w);
+	Rectangle *rect = new Rectangle(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l, w);
 	return rect;
 }
 
-Shape* readSquare(ifstream &inFile, int id)
+Shape* readSquare(Canvas &canvas, ifstream &inFile, int id)
 {
 	int x, y, l, width;
 	string color, pen, cap, join, bstyle, bcolor;
@@ -279,11 +284,11 @@ Shape* readSquare(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, bstyle);
 
-	Square *squ = new Square(ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l);
+	Square *squ = new Square(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l);
 	return squ;
 }
 
-Shape* readEllipse(ifstream &inFile, int id)
+Shape* readEllipse(Canvas &canvas, ifstream &inFile, int id)
 {
 	int x, y, l, w, width;
 	string color, pen, cap, join, bstyle, bcolor;
@@ -327,11 +332,11 @@ Shape* readEllipse(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, bstyle);
 
-	Ellipse *ell = new Ellipse(ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l, w);
+	Ellipse *ell = new Ellipse(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l, w);
 	return ell;
 }
 
-Shape* readCircle(ifstream &inFile, int id)
+Shape* readCircle(Canvas &canvas, ifstream &inFile, int id)
 {
 	int x, y, l, width;
 	string color, pen, cap, join, bstyle, bcolor;
@@ -373,11 +378,11 @@ Shape* readCircle(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, bstyle);
 
-	Ellipse *circ = new Ellipse(ERR:INSERT_PAINT_DEVICE_HERE, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l);
+	Ellipse *circ = new Ellipse(canvas, id, getColor(color), width, getPen(pen), getCap(cap), getJoin(join), brushColor, getBrush(bstyle), x, y, l);
 	return circ;
 }
 
-Shape* readText(ifstream &inFile, int id)
+Shape* readText(Canvas &canvas, ifstream &inFile, int id)
 {
 	int x, y, l, w, width;
 	string textStr, color, allignment, fsize, fontfam, fontstyle, fweight;
@@ -421,7 +426,7 @@ Shape* readText(ifstream &inFile, int id)
 	inFile.ignore(1000, ':');
 	getline(inFile, fweight);
 
-	Text *txt = Text Ellipse(ERR:INSERT_PAINT_DEVICE_HERE, id, textStr, textColor, getAlignFlag(allignment), fsize, fontfam, getText(fontstyle), getWeight(fweight) x, y, l, w);
+	Text *txt = Text Ellipse(canvas, id, textStr, textColor, getAlignFlag(allignment), fsize, fontfam, getText(fontstyle), getWeight(fweight) x, y, l, w);
 	return txt;
 }
 
